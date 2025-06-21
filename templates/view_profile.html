@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: white;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 450px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #007bff;
+            margin-bottom: 15px;
+        }
+
+        .info-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .info-group label {
+            font-weight: bold;
+            color: #555;
+            display: block;
+        }
+
+        .info-group p {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Profile</h2>
+
+        <!-- Profile Picture -->
+        {% if profile.profile_image %}
+            <img src="{{ url_for('static', filename='profile_images/' + profile.profile_image) }}" alt="Profile Picture" class="profile-pic">
+        {% else %}
+            <img src="{{ url_for('static', filename='default.jpg') }}" alt="Profile Picture" class="profile-pic">
+        {% endif %}
+
+        <!-- Profile Information -->
+        <div class="info-group">
+            <label>Full Name:</label>
+            <p>{{ profile.name }}</p>
+        </div>
+
+        <div class="info-group">
+            <label>Phone Number:</label>
+            <p>{{ profile.phone }}</p>
+        </div>
+
+        <div class="info-group">
+            <label>Date of Birth:</label>
+            <p>{{ profile.dob }}</p>
+        </div>
+
+        <div class="info-group">
+            <label>Gender:</label>
+            <p>{{ profile.gender }}</p>
+        </div>
+
+        <div class="info-group">
+            <label>Degree Program:</label>
+            <p>{{ profile.degree }}</p>
+        </div>
+
+        <div class="info-group">
+            <label>Branch/Major:</label>
+            <p>{{ profile.branch }}</p>
+        </div>
+
+        <div class="info-group">
+            <label>CGPA:</label>
+            <p>{{ profile.cgpa }}</p>
+        </div>
+
+        <div class="info-group">
+            <label>Year of Graduation:</label>
+            <p>{{ profile.graduation_year }}</p>
+        </div>
+
+        <div class="info-group">
+            <label>Skills:</label>
+            <p>{{ profile.skills }}</p>
+        </div>
+
+        <!-- Edit Profile Button -->
+        <a href="{{ url_for('student_profile') }}" class="btn">Edit Profile</a>
+    </div>
+</body>
+</html>

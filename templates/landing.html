@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecruitEase - University Job Portal</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #f8f9fa, #dfe9f3);
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #004e92, #000428);
+            padding: 15px 30px;
+            color: white;
+        }
+        .navbar h1 {
+            margin: 0;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #ff9800;
+        }
+        
+        /* Carousel Styles */
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+        }
+        .carousel img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .carousel img.active {
+            opacity: 1;
+        }
+        .carousel-buttons {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .carousel-buttons button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .carousel-buttons button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        .container {
+            text-align: center;
+            padding: 50px;
+            padding-top:20px;
+            background-color: #FFF2F2;
+        }
+        .features {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        .feature-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 30%;
+            transition: transform 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+            gap: 5px;
+        }
+        .feature-box img {
+            width: 100%;
+            border-radius: 10px 10px 0 0;
+        }
+        .feature-box:hover {
+            transform: translateY(-10px);
+            background-color: #7886C7;
+            color: white;
+        }
+        .footer {
+            background: #000428;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+            .feature-box {
+                width: 80%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>RecruitEase</h1>
+        <ul class="nav-links">
+            <li><a href="/login">Login</a></li>
+        </ul>
+    </div>
+
+    <!-- Carousel Section -->
+    <div class="carousel">
+        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="active" alt="Slide 1">
+        <img src="https://plus.unsplash.com/premium_photo-1683887034146-c79058dbdcb1?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Slide 2">
+        <img src="https://plus.unsplash.com/premium_photo-1661410847282-d6af31c576a9?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Slide 3">
+
+        <div class="carousel-buttons">
+            <button id="prev">&#10094;</button>
+            <button id="next">&#10095;</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Why Choose RecruitEase?</h2>
+        <div class="features">
+            <div class="feature-box">
+                <img src="https://plus.unsplash.com/premium_photo-1661773876216-1f14d78e8f7f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Job Search">
+                <h3>Easy Job Search</h3>
+                <p>Find jobs that match your skills with our advanced search features.</p>
+            </div>
+            <div class="feature-box">
+                <img src="https://plus.unsplash.com/premium_photo-1683887034146-c79058dbdcb1?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="University Connections">
+                <h3>University Connections</h3>
+                <p>Connect with top universities and recruiters easily.</p>
+            </div>
+            <div class="feature-box">
+                <img src="https://plus.unsplash.com/premium_photo-1661410847282-d6af31c576a9?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Seamless Applications">
+                <h3>Seamless Applications</h3>
+                <p>Apply to jobs with a single click and track your progress.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 RecruitEase. All rights reserved.</p>
+    </div>
+
+    <!-- JavaScript for Carousel -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll(".carousel img");
+        const totalSlides = slides.length;
+
+        document.getElementById("next").addEventListener("click", () => {
+            slides[currentSlide].classList.remove("active");
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slides[currentSlide].classList.add("active");
+        });
+
+        document.getElementById("prev").addEventListener("click", () => {
+            slides[currentSlide].classList.remove("active");
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add("active");
+        });
+
+        setInterval(() => document.getElementById("next").click(), 2000); 
+    </script>
+</body>
+</html>

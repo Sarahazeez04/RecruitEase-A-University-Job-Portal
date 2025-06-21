@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Status</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #f8f9fa, #dfe9f3);
+            color: #333;
+        }
+
+        header {
+            background: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .job {
+            padding: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .job:last-child {
+            border-bottom: none;
+        }
+
+        .job h2 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .job p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .applications {
+            margin-top: 15px;
+        }
+
+        .application {
+            background: #f8f9fa;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .application p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .application a {
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .application a:hover {
+            text-decoration: underline;
+        }
+
+        .status {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .pending { color: orange; }
+        .accepted { color: green; }
+        .rejected { color: red; }
+
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .btn-accept {
+            background: green;
+            color: white;
+        }
+
+        .btn-reject {
+            background: red;
+            color: white;
+        }
+
+        .btn-accept:hover { background: darkgreen; }
+        .btn-reject:hover { background: darkred; }
+
+        .no-applications {
+            color: red;
+            font-style: italic;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>Job Status</header>
+    <div class="container">
+        {% for job in jobs %}
+            <div class="job">
+                <h2>{{ job.job_title }} - {{ job.company_name }}</h2>
+                <p><strong>Location:</strong> {{ job.location }}</p>
+                <p><strong>Salary:</strong> {{ job.salary }}</p>
+                <p><strong>Description:</strong> {{ job.job_description }}</p>
+                <h3>Applications Received:</h3>
+                <div class="applications">
+                    {% if job.id in job_applications and job_applications[job.id] %}
+                        {% for app in job_applications[job.id] %}
+                            <div class="application">
+                                <p><strong>Applicant Name:</strong> {{ app.applicant_name }}</p>
+                                <p><strong>Email:</strong> {{ app.applicant_email }}</p>
+                                <p><strong>Resume:</strong> 
+                                    <a href="{{ url_for('static', filename='resumes/' + app.resume_filename) }}" target="_blank">
+                                        View Resume <i class="fa fa-external-link-alt"></i>
+                                    </a>
+                                </p>
+                                <p class="status {% if app.status == 'Pending' %}pending{% elif app.status == 'Accepted' %}accepted{% else %}rejected{% endif %}">
+                                    Status: {{ app.status }}
+                                </p>
+                                
+                                <div class="action-buttons">
+                                    <form method="POST" action="{{ url_for('jobstatus') }}">
+                                        <input type="hidden" name="application_id" value="{{ app.id }}">
+                                        <button type="submit" name="status" value="Accepted" class="btn btn-accept">Accept</button>
+                                        <button type="submit" name="status" value="Rejected" class="btn btn-reject">Reject</button>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-applications">No applications received yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

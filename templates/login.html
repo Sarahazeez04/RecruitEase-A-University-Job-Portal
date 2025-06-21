@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecruitEase - Login & Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 400px;
+            background: white;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .input-group input, .input-group select {
+            width: calc(100% - 20px); /* Ensuring consistent width */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        input:focus, select:focus {
+            rgb(45, 51, 107);
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+            outline: none;
+        }
+        .btn {
+            width: 100%;
+            background: rgb(45, 51, 107);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .toggle-link {
+            margin-top: 15px;
+            display: block;
+            color: #0056b3;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .toggle-link:hover{
+            color: rgb(192, 28, 28);
+            
+        }
+    </style>
+</head>
+<body>
+    <!-- LOGIN FORM -->
+    <div class="container" id="login-container">
+        <h2>Login</h2>
+        <form method="POST" action="{{ url_for('login') }}">
+            <div class="input-group">
+                <label for="role">Role</label>
+                <select id="role" name="role">
+                    <option value="student">Student</option>
+                    <option value="admin">Administrator</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button class="btn" type="submit">Login</button>
+        </form>
+        <a class="toggle-link" onclick="toggleForm()">Don't have an account? Register</a>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div class="container" id="register-container" style="display: none;">
+        <h2>Register</h2>
+        <form method="POST" action="{{ url_for('register') }}">
+            <div class="input-group">
+                <label for="reg-role">Role</label>
+                <select id="reg-role" name="role">
+                    <option value="student">Student</option>
+                    <option value="admin">Administrator</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="input-group">
+                <label for="reg-email">Email</label>
+                <input type="email" id="reg-email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="reg-password">Password</label>
+                <input type="password" id="reg-password" name="password" required>
+            </div>
+            <button class="btn" type="submit">Register</button>
+        </form>
+        <a class="toggle-link" onclick="toggleForm()">Already have an account? Login</a>
+    </div>
+
+    <script>
+        function toggleForm() {
+            document.getElementById('login-container').style.display = 
+                document.getElementById('login-container').style.display === 'none' ? 'block' : 'none';
+            document.getElementById('register-container').style.display = 
+                document.getElementById('register-container').style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
